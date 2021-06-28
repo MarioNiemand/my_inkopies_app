@@ -151,58 +151,55 @@ class _HomePageState extends State<HomePage> {
                           title: Text('Update ${itemNameList[index]} ?'),
                           content: SizedBox(
                             height: MediaQuery.of(context).size.height * 0.16,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                        width: MediaQuery.of(context).size.width * 0.5,
-                                        child: TextFormField(
-                                          initialValue: itemCountList[index].toString(),
-                                          decoration: const InputDecoration(
-                                            icon: Icon(Icons.format_list_numbered),
-                                            labelText: 'Hoeveelheid',
-                                          ),
-                                          onSaved: (String? value) {
-                                            // This optional block of code can be used to run
-                                            // code when the user saves the form.
-                                          },
-                                          validator: (String? value) {
-                                            return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
-                                          },
-                                        )
-                                    ),
-                                  ],
-                                ),
+                            child: Form(
+                              onChanged: () {
+                                Form.of(primaryFocus!.context!)!.save();
+                              },
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: MediaQuery.of(context).size.width * 0.5,
+                                          child: TextFormField(
+                                            initialValue: itemCountList[index].toString(),
+                                            decoration: const InputDecoration(
+                                              icon: Icon(Icons.format_list_numbered),
+                                              labelText: 'Hoeveelheid',
+                                            ),
+                                            onSaved: (String? amountvalue) {
+                                              itemCountList[index] = int.parse('$amountvalue');
+                                            },
+                                          )
+                                      ),
+                                    ],
+                                  ),
 
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                        width: MediaQuery.of(context).size.width * 0.5,
-                                        child: TextFormField(
-                                          initialValue: itemPriceList[index].toString(),
-                                          decoration: const InputDecoration(
-                                            icon: Icon(Icons.money),
-                                            labelText: 'Prys',
-                                          ),
-                                          onSaved: (String? value) {
-                                            // This optional block of code can be used to run
-                                            // code when the user saves the form.
-                                          },
-                                          validator: (String? value) {
-                                            return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
-                                          },
-                                        )
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: MediaQuery.of(context).size.width * 0.5,
+                                          child: TextFormField(
+                                            initialValue: itemPriceList[index].toString(),
+                                            decoration: const InputDecoration(
+                                              icon: Icon(Icons.money),
+                                              labelText: 'Prys',
+                                            ),
+                                            onSaved: (String? myvalue) {
+                                              itemPriceList[index] = int.parse('$myvalue');
+                                            },
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           actions: <Widget>[
                             TextButton(
                               onPressed: (){
-
+                                //Form.of(primaryFocus!.context!)!.save();
                                 Navigator.push( context, MaterialPageRoute( builder: (context) => HomePage()),);
                               } ,
                               child: const Text('Save'),
@@ -292,7 +289,7 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: [
                 Positioned(
-                  top: MediaQuery.of(context).size.height * 0.75,
+                  top: MediaQuery.of(context).size.height * 0.78,
                   left: MediaQuery.of(context).size.height * 0.015,
                   child:
                   Card(
