@@ -4,13 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_inkopies_app/food_data.dart';
-import 'package:flutter_launcher_icons/android.dart';
-import 'package:flutter_launcher_icons/constants.dart';
-import 'package:flutter_launcher_icons/custom_exceptions.dart';
-import 'package:flutter_launcher_icons/ios.dart';
-import 'package:flutter_launcher_icons/main.dart';
-import 'package:flutter_launcher_icons/utils.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -192,6 +186,7 @@ class _HomePageState extends State<HomePage> {
                                               onSaved: (String? myvalue) {
                                                 itemPriceList[index] =
                                                     int.parse('$myvalue');
+                                                //loadFoodData().where((p) => p.title.startsWith(itemNameList[index])).toList();
                                                 //TODO: save stored price locally
                                                 // final mylist = loadFoodData();
                                                 // final FoodData listItem = mylist[index];
@@ -207,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
-                                  //Form.of(primaryFocus!.context!)!.save();
+
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -225,6 +220,21 @@ class _HomePageState extends State<HomePage> {
                                   );
                                 },
                                 child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  itemNameList.remove(itemNameList[index]);
+                                  itemIconList.remove(itemIconList[index]);
+                                  itemPriceList.remove(itemPriceList[index]);
+                                  itemCountList.remove(itemCountList[index]);
+                                  itemChecked.remove(itemChecked[index]);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
+                                  );
+                                },
+                                child: const Text('Delete'),
                               ),
                             ],
                           ),
@@ -341,8 +351,10 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         elevation: 50,
         onPressed: () {
-          if (itemNameList.isNotEmpty)
+
             showSearch(context: context, delegate: FoodItemsSearch());
+
+
         },
         child: const Icon(Icons.add),
         backgroundColor: Colors.red,
@@ -458,7 +470,17 @@ class FoodItemsSearch extends SearchDelegate<FoodData> {
             })
         : Center(
             child: RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                itemNameList.add(query);
+                itemIconList.add("");
+                itemChecked.add(false);
+                itemCountList.add(1);
+                itemPriceList.add(10);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
               child: Text("Add to list"),
             ),
           );
