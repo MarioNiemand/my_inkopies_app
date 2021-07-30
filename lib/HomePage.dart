@@ -13,27 +13,15 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-List itemNameList = ["Brood", "Melk", "Meel", "Botter", "Koffie"];
-List itemPriceList = [15, 25, 35, 45, 55];
-List itemIconList = [
-  'assets/icons/Fruits and Vegetables/apple.svg',
-  'assets/icons/Fruits and Vegetables/apple.svg',
-  'assets/icons/Fruits and Vegetables/apple.svg',
-  'assets/icons/Fruits and Vegetables/apple.svg',
-  'assets/icons/Fruits and Vegetables/apple.svg'
-];
-List itemCountList = [
-  1,
-  2,
-  1,
-  3,
-  6,
-];
-List itemChecked = [false, false, false, false, false];
+List itemNameList = [];
+List itemPriceList = [];
+List itemIconList = [];
+List itemCountList = [];
+List itemChecked = [];
 
 AlertDialog alert = AlertDialog(
   title: Text("!"),
-  content: Text("Are you sure you want to clear your list?"),
+  content: Text("Is jy seker jy wil die lys verwyder?"),
   actions: [
     TextButton(
       onPressed: () {
@@ -43,11 +31,11 @@ AlertDialog alert = AlertDialog(
         itemCountList.clear();
         itemChecked.clear();
       },
-      child: Text("Yes"),
+      child: Text("Ja"),
     ),
     TextButton(
       onPressed: () {},
-      child: Text("No"),
+      child: Text("Nee"),
     )
   ],
 );
@@ -77,9 +65,9 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
-                    title: const Text('Alert!'),
+                    title: const Text('Waarskuwing!'),
                     content:
-                        const Text('Are you sure you want to clear your list?'),
+                        const Text('Is jy seker jy wil die lys verwyder?'),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -93,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                             MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         },
-                        child: const Text('Yes'),
+                        child: const Text('Ja'),
                       ),
                       TextButton(
                         onPressed: () {
@@ -102,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                             MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         },
-                        child: const Text('No'),
+                        child: const Text('Nee'),
                       ),
                     ],
                   ),
@@ -138,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () => showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: Text('Update ${itemNameList[index]} ?'),
+                            title: Text('Opdateer ${itemNameList[index]} ?'),
                             content: SizedBox(
                               height: MediaQuery.of(context).size.height * 0.16,
                               child: Form(
@@ -209,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                                         builder: (context) => HomePage()),
                                   );
                                 },
-                                child: const Text('Save'),
+                                child: const Text('Stoor'),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -219,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                                         builder: (context) => HomePage()),
                                   );
                                 },
-                                child: const Text('Cancel'),
+                                child: const Text('Kanselleer'),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -234,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                                         builder: (context) => HomePage()),
                                   );
                                 },
-                                child: const Text('Delete'),
+                                child: const Text('Verwyder'),
                               ),
                             ],
                           ),
@@ -322,7 +310,7 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: [
                 Positioned(
-                  top: MediaQuery.of(context).size.height * 0.78,
+                  top: MediaQuery.of(context).size.height * 0.79,
                   left: MediaQuery.of(context).size.height * 0.015,
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -332,7 +320,7 @@ class _HomePageState extends State<HomePage> {
                       width: MediaQuery.of(context).size.width * 0.75,
                       child: ListTile(
                         leading: Text(
-                          "Total",
+                          "Totaal",
                           style: TextStyle(fontSize: 20),
                         ),
                         trailing: Text(
